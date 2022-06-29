@@ -1,0 +1,24 @@
+name: lmc
+flags:
+  - q
+commands:
+  - name: config
+    commands:
+      - name: migrate
+        flags:
+          - output
+          - o
+          - argus-conf-file
+          - csc-conf-file
+          - argus-release
+          - csc-release
+          - using-files
+    flags:
+      - file
+      - f
+  - name: completion
+    commands:
+      - name: bash
+      - name: zsh
+      - name: powershell
+      - name: fish

@@ -1,0 +1,12 @@
+name: "lmc"
+version: "1.0.0-ea01"
+usage: "Logicmonitor LM Container Utility"
+description: |-
+  Logicmonitor LM Container Utility
+command: "$HELM_PLUGIN_DIR/bin/lmc"
+
+hooks:
+  install: "cd $HELM_PLUGIN_DIR; ./scripts/install.sh"
+  update: "cd $HELM_PLUGIN_DIR; ./scripts/install.sh"
+
+useTunnel: true
