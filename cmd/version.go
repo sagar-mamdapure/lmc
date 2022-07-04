@@ -20,8 +20,8 @@ var (
 type versionMap struct {
 	Version      string
 	Commit       string
-	BuildDateUTC time.Time
-	BuildDate    time.Time
+	BuildDateUTC string
+	BuildDate    string
 	BuiltBy      string
 }
 
@@ -53,16 +53,19 @@ to quickly create a Cobra application.`,
 
 func NewVersionMap() *versionMap {
 	vm := &versionMap{
-		Version: Version,
-		Commit:  Commit,
-		BuiltBy: BuiltBy,
+		Version:      Version,
+		Commit:       Commit,
+		BuiltBy:      BuiltBy,
+		BuildDateUTC: "unknown",
+		BuildDate:    "unknown",
 	}
-	date, err := time.Parse(time.RFC3339, Date)
+	date, err := time.Parse(time.RFC3339, Date) // nolint: errcheck
 	if err != nil {
-		return nil
+		return vm
 	}
-	vm.BuildDateUTC = date.UTC()
-	vm.BuildDate = date.Local()
+	vm.BuildDateUTC = date.UTC().String()
+	vm.BuildDate = date.Local().String()
+
 	return vm
 }
 
