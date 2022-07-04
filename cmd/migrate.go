@@ -3,11 +3,11 @@ package cmd
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/spf13/cobra"
 	"github.com/logicmonitor/lmc/pkg/config"
 	"github.com/logicmonitor/lmc/pkg/conv"
 	"github.com/logicmonitor/lmc/pkg/exec"
 	"github.com/logicmonitor/lmc/pkg/util"
+	"github.com/spf13/cobra"
 	"gopkg.in/yaml.v2"
 	"io/fs"
 	"io/ioutil"
@@ -62,6 +62,13 @@ to quickly create a Cobra application.`,
 				return
 			}
 			util.PrintlnSuccess(cmd, fmt.Sprintf("Read Collectorset Controller Configuration from release %s", cscr))
+			csbkpf := cscr + ".yaml.bkp"
+			err = ioutil.WriteFile(csbkpf, []byte(cscConfStr), fs.ModePerm)
+			if err != nil {
+				util.PrintlnFailed(cmd, fmt.Sprintf("Failed to store Collectorset Controller Configuration to backup file %s: %s", csbkpf, err))
+				return
+			}
+			util.PrintlnSuccess(cmd, fmt.Sprintf("Stored Collectorset Controller Configuration to backup file %s", csbkpf))
 			util.PrintlnRunning(cmd, fmt.Sprintf("Reading Argus Configuration from release %s...", ar))
 			argusConfStr, err = execObj.RunProcessAndCaptureOutput(HelmConfigObj.BIN, "get", "values", ar, "-n", HelmConfigObj.NAMESPACE)
 			if err != nil {
@@ -69,45 +76,52 @@ to quickly create a Cobra application.`,
 				return
 			}
 			util.PrintlnSuccess(cmd, fmt.Sprintf("Read Argus Configuration from release %s", ar))
+			abkpf := ar + ".yaml.bkp"
+			err = ioutil.WriteFile(abkpf, []byte(argusConfStr), fs.ModePerm)
+			if err != nil {
+				util.PrintlnFailed(cmd, fmt.Sprintf("Failed to store Argus Configuration to backup file %s: %s", abkpf, err))
+				return
+			}
+			util.PrintlnSuccess(cmd, fmt.Sprintf("Stored Argus Configuration to backup file %s", abkpf))
 		}
 
-		util.PrintlnRunning(cmd, fmt.Sprintf("Unmarshalling Collectorset Controller Configuration..."))
+		util.PrintlnRunning(cmd, "Unmarshalling Collectorset Controller Configuration...")
 		oldCSCConf, err := conv.UnmarshalCscConf(cscConfStr)
 		if err != nil {
 			util.PrintlnFailed(cmd, fmt.Sprintf("Failed to unmarshal collectorset controller config: %s", err))
 			util.PrintlnDebug(cmd, cscConfStr)
 			return
 		}
-		util.PrintlnSuccess(cmd, fmt.Sprintf("Successfully unmarshaled Collectorset Controller Configuration"))
+		util.PrintlnSuccess(cmd, "Successfully unmarshaled Collectorset Controller Configuration")
 		util.PrintlnDebugConfig(cmd, "Old Collectorset Controller Config: ", oldCSCConf)
 
-		util.PrintlnRunning(cmd, fmt.Sprintf("Converting Collectorset Controller Configuration to new format..."))
+		util.PrintlnRunning(cmd, "Converting Collectorset Controller Configuration to new format...")
 		newCscConf := oldCSCConf.ToNewCscConf()
-		util.PrintlnSuccess(cmd, fmt.Sprintf("Converted Collectorset Controller Configuration to new format"))
+		util.PrintlnSuccess(cmd, "Converted Collectorset Controller Configuration to new format")
 
-		util.PrintlnRunning(cmd, fmt.Sprintf("Unmarshalling Argus Configuration..."))
+		util.PrintlnRunning(cmd, "Unmarshalling Argus Configuration...")
 		oldArgusConf, err := conv.UnmarshalArgusConf(argusConfStr)
 		if err != nil {
 			util.PrintlnFailed(cmd, fmt.Sprintf("Failed to unmarshal argus config: %s", err))
 			util.PrintlnDebug(cmd, argusConfStr)
 			return
 		}
-		util.PrintlnSuccess(cmd, fmt.Sprintf("Successfully unmarshaled Argus Configuration"))
+		util.PrintlnSuccess(cmd, "Successfully unmarshaled Argus Configuration")
 		util.PrintlnDebugConfig(cmd, "Old argus Config:", oldArgusConf)
 
-		util.PrintlnRunning(cmd, fmt.Sprintf("Converting Argus Configuration to new format..."))
+		util.PrintlnRunning(cmd, "Converting Argus Configuration to new format...")
 		newArgusConf := oldArgusConf.ToNewArgusConf()
-		util.PrintlnSuccess(cmd, fmt.Sprintf("Converted Argus Configuration to new format"))
+		util.PrintlnSuccess(cmd, "Converted Argus Configuration to new format")
 
 		util.PrintlnDebugConfig(cmd, "New Collectorset Controller Config:", newCscConf)
 		util.PrintlnDebugConfig(cmd, "New Argus Config:", newArgusConf)
-		util.PrintlnRunning(cmd, fmt.Sprintf("Merging Collectorset Controller & Argus Configuration to LM Container configuration..."))
+		util.PrintlnRunning(cmd, "Merging Collectorset Controller & Argus Configuration to LM Container configuration...")
 		lmcConfig, err := config.Merge(newCscConf, newArgusConf)
 		if err != nil {
 			util.PrintlnFailed(cmd, fmt.Sprintf("Failed to merge collectorset controller & argus configs into LM Container config: %s", err))
 			return
 		}
-		util.PrintlnSuccess(cmd, fmt.Sprintf("Merged Collectorset Controller & Argus Configuration to LM Container Configuration"))
+		util.PrintlnSuccess(cmd, "Merged Collectorset Controller & Argus Configuration to LM Container Configuration")
 
 		util.PrintlnDebugConfig(cmd, "Generated LM Container Config:", lmcConfig)
 		var marshal []byte
