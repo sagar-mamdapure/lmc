@@ -22,3 +22,6 @@ commands:
       - name: zsh
       - name: powershell
       - name: fish
+  - name: version
+    flags:
+      - short

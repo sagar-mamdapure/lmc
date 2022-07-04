@@ -1,3 +1,11 @@
 .idea/
 bin/
 dist/
+node_modules/
+package-lock.json
+argus-configuration.yaml
+collectorset-controller-configuration.yaml
+argus.yaml.bkp
+collectorset-controller.yaml.bkp
+lmc-configuration.yaml
+lmc-configuration.json
