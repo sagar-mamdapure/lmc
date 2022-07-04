@@ -34,5 +34,5 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	// configCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
-	configCmd.PersistentFlags().StringVarP(&FilePath, "file", "f", "lmc-configuration.yaml", "LM Container Configuration FilePath")
+	configCmd.PersistentFlags().StringVarP(&FilePath, "file", "f", "lm-container-configuration.yaml", "LM Container Configuration FilePath")
 }
