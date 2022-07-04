@@ -9,3 +9,5 @@ argus.yaml.bkp
 collectorset-controller.yaml.bkp
 lmc-configuration.yaml
 lmc-configuration.json
+lm-container-configuration.yaml
+lm-container-configuration.json
