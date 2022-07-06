@@ -166,10 +166,11 @@ type NewArgusConf struct {
 	} `yaml:"global,omitempty" json:"global,omitempty"`
 	NameOverride     string `yaml:"nameOverride,omitempty" json:"nameOverride,omitempty"`
 	FullnameOverride string `yaml:"fullnameOverride,omitempty" json:"fullnameOverride,omitempty"`
-	Rbac             struct {
-		Create bool `yaml:"create,omitempty" json:"create,omitempty"`
-	} `yaml:"rbac,omitempty" json:"rbac,omitempty"`
-	ServiceAccount struct {
+	Rbac             *Rbac  `yaml:"rbac,omitempty" json:"rbac,omitempty"`
+	ServiceAccount   struct {
 		Create bool `yaml:"create,omitempty" json:"create,omitempty"`
 	} `yaml:"serviceAccount,omitempty" json:"serviceAccount,omitempty"`
+}
+type Rbac struct {
+	Create *bool `yaml:"create,omitempty" json:"create,omitempty"`
 }

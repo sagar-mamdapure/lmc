@@ -164,6 +164,11 @@ func (oldConf *OldArgusConf) ToNewArgusConf() *NewArgusConf {
 		newConf.Image.Repository = oldConf.ImageRepository
 	}
 
+	if !oldConf.EnableRBAC {
+		f := false
+		newConf.Rbac = &Rbac{Create: &f}
+	}
+
 	newConf.NodeSelector = oldConf.NodeSelector
 	newConf.Affinity = oldConf.Affinity
 	newConf.PriorityClassName = oldConf.PriorityClassName
