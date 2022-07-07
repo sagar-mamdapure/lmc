@@ -32,35 +32,31 @@ func (is *intOrString) UnmarshalYAML(
 }
 
 type OldArgusConf struct {
-	AccessID           string `yaml:"accessID,omitempty" json:"accessID,omitempty"`
-	AccessKey          string `yaml:"accessKey,omitempty" json:"accessKey,omitempty"`
-	Account            string `yaml:"account,omitempty" json:"account,omitempty"`
-	ClusterName        string `yaml:"clusterName,omitempty" json:"clusterName,omitempty"`
-	LogLevel           string `yaml:"logLevel,omitempty" json:"logLevel,omitempty"`
-	DeleteDevices      bool   `yaml:"deleteDevices,omitempty" json:"deleteDevices,omitempty"`
-	DisableAlerting    bool   `yaml:"disableAlerting,omitempty" json:"disableAlerting,omitempty"`
-	EnableRBAC         bool   `yaml:"enableRBAC,omitempty" json:"enableRBAC,omitempty"`
-	ClusterGroupID     int    `yaml:"clusterGroupID,omitempty" json:"clusterGroupID,omitempty"`
-	ResourceGroupID    int    `yaml:"resourceGroupID,omitempty" json:"resourceGroupID,omitempty"`
-	EtcdDiscoveryToken string `yaml:"etcdDiscoveryToken,omitempty" json:"etcdDiscoveryToken,omitempty"`
-	ImageRepository    string `yaml:"imageRepository,omitempty" json:"imageRepository,omitempty"`
-	ImageTag           string `yaml:"imageTag,omitempty" json:"imageTag,omitempty"`
-	ImagePullPolicy    string `yaml:"imagePullPolicy,omitempty" json:"imagePullPolicy,omitempty"`
-	ProxyURL           string `yaml:"proxyURL,omitempty" json:"proxyURL,omitempty"`
-	ProxyUser          string `yaml:"proxyUser,omitempty" json:"proxyUser,omitempty"`
-	ProxyPass          string `yaml:"proxyPass,omitempty" json:"proxyPass,omitempty"`
-	NodeSelector       struct {
-	} `yaml:"nodeSelector,omitempty" json:"nodeSelector,omitempty"`
-	Affinity struct {
-	} `yaml:"affinity,omitempty" json:"affinity,omitempty"`
-	PriorityClassName string        `yaml:"priorityClassName,omitempty" json:"priorityClassName,omitempty"`
-	Tolerations       []interface{} `yaml:"tolerations,omitempty" json:"tolerations,omitempty"`
-	Labels            struct {
-	} `yaml:"labels,omitempty" json:"labels,omitempty"`
-	Annotations struct {
-	} `yaml:"annotations,omitempty" json:"annotations,omitempty"`
-	IgnoreSsl             bool `yaml:"ignore_ssl,omitempty" json:"ignore_ssl,omitempty"`
-	RegisterGenericFilter bool `yaml:"registerGenericFilter,omitempty" json:"registerGenericFilter,omitempty"`
+	AccessID              string         `yaml:"accessID,omitempty" json:"accessID,omitempty"`
+	AccessKey             string         `yaml:"accessKey,omitempty" json:"accessKey,omitempty"`
+	Account               string         `yaml:"account,omitempty" json:"account,omitempty"`
+	ClusterName           string         `yaml:"clusterName,omitempty" json:"clusterName,omitempty"`
+	LogLevel              string         `yaml:"logLevel,omitempty" json:"logLevel,omitempty"`
+	DeleteDevices         bool           `yaml:"deleteDevices,omitempty" json:"deleteDevices,omitempty"`
+	DisableAlerting       bool           `yaml:"disableAlerting,omitempty" json:"disableAlerting,omitempty"`
+	EnableRBAC            bool           `yaml:"enableRBAC,omitempty" json:"enableRBAC,omitempty"`
+	ClusterGroupID        int            `yaml:"clusterGroupID,omitempty" json:"clusterGroupID,omitempty"`
+	ResourceGroupID       int            `yaml:"resourceGroupID,omitempty" json:"resourceGroupID,omitempty"`
+	EtcdDiscoveryToken    string         `yaml:"etcdDiscoveryToken,omitempty" json:"etcdDiscoveryToken,omitempty"`
+	ImageRepository       string         `yaml:"imageRepository,omitempty" json:"imageRepository,omitempty"`
+	ImageTag              string         `yaml:"imageTag,omitempty" json:"imageTag,omitempty"`
+	ImagePullPolicy       string         `yaml:"imagePullPolicy,omitempty" json:"imagePullPolicy,omitempty"`
+	ProxyURL              string         `yaml:"proxyURL,omitempty" json:"proxyURL,omitempty"`
+	ProxyUser             string         `yaml:"proxyUser,omitempty" json:"proxyUser,omitempty"`
+	ProxyPass             string         `yaml:"proxyPass,omitempty" json:"proxyPass,omitempty"`
+	NodeSelector          map[string]any `yaml:"nodeSelector,omitempty" json:"nodeSelector,omitempty"`
+	Affinity              map[string]any `yaml:"affinity,omitempty" json:"affinity,omitempty"`
+	PriorityClassName     string         `yaml:"priorityClassName,omitempty" json:"priorityClassName,omitempty"`
+	Tolerations           []interface{}  `yaml:"tolerations,omitempty" json:"tolerations,omitempty"`
+	Labels                map[string]any `yaml:"labels,omitempty" json:"labels,omitempty"`
+	Annotations           map[string]any `yaml:"annotations,omitempty" json:"annotations,omitempty"`
+	IgnoreSsl             bool           `yaml:"ignore_ssl,omitempty" json:"ignore_ssl,omitempty"`
+	RegisterGenericFilter bool           `yaml:"registerGenericFilter,omitempty" json:"registerGenericFilter,omitempty"`
 	AppIntervals          struct {
 		PeriodicSyncInterval   string `yaml:"periodic_sync_interval,omitempty" json:"periodic_sync_interval,omitempty"`
 		PeriodicDeleteInterval string `yaml:"periodic_delete_interval,omitempty" json:"periodic_delete_interval,omitempty"`
@@ -108,27 +104,24 @@ type OldArgusConf struct {
 		Port int `yaml:"port,omitempty" json:"port,omitempty"`
 	} `yaml:"openmetrics,omitempty" json:"openmetrics,omitempty"`
 	Collector struct {
-		Replicas          intOrString `yaml:"replicas,omitempty" json:"replicas,omitempty"`
-		Size              string      `yaml:"size,omitempty" json:"size,omitempty"`
-		ImageRepository   string      `yaml:"imageRepository,omitempty" json:"imageRepository,omitempty"`
-		ImageTag          string      `yaml:"imageTag,omitempty" json:"imageTag,omitempty"`
-		ImagePullPolicy   string      `yaml:"imagePullPolicy,omitempty" json:"imagePullPolicy,omitempty"`
-		SecretName        string      `yaml:"secretName,omitempty" json:"secretName,omitempty"`
-		GroupID           int         `yaml:"groupID,omitempty" json:"groupID,omitempty"`
-		EscalationChainID intOrString `yaml:"escalationChainID,omitempty" json:"escalationChainID,omitempty"`
-		CollectorVersion  int         `yaml:"collectorVersion,omitempty" json:"collectorVersion,omitempty"`
-		UseEA             bool        `yaml:"useEA,omitempty" json:"useEA,omitempty"`
-		ProxyURL          string      `yaml:"proxyURL,omitempty" json:"proxyURL,omitempty"`
-		ProxyUser         string      `yaml:"proxyUser,omitempty" json:"proxyUser,omitempty"`
-		ProxyPass         string      `yaml:"proxyPass,omitempty" json:"proxyPass,omitempty"`
-		Annotations       struct {
-		} `yaml:"annotations,omitempty" json:"annotations,omitempty"`
-		Labels struct {
-		} `yaml:"labels,omitempty" json:"labels,omitempty"`
-		Statefulsetspec struct {
+		Replicas          intOrString    `yaml:"replicas,omitempty" json:"replicas,omitempty"`
+		Size              string         `yaml:"size,omitempty" json:"size,omitempty"`
+		ImageRepository   string         `yaml:"imageRepository,omitempty" json:"imageRepository,omitempty"`
+		ImageTag          string         `yaml:"imageTag,omitempty" json:"imageTag,omitempty"`
+		ImagePullPolicy   string         `yaml:"imagePullPolicy,omitempty" json:"imagePullPolicy,omitempty"`
+		SecretName        string         `yaml:"secretName,omitempty" json:"secretName,omitempty"`
+		GroupID           int            `yaml:"groupID,omitempty" json:"groupID,omitempty"`
+		EscalationChainID intOrString    `yaml:"escalationChainID,omitempty" json:"escalationChainID,omitempty"`
+		CollectorVersion  int            `yaml:"collectorVersion,omitempty" json:"collectorVersion,omitempty"`
+		UseEA             bool           `yaml:"useEA,omitempty" json:"useEA,omitempty"`
+		ProxyURL          string         `yaml:"proxyURL,omitempty" json:"proxyURL,omitempty"`
+		ProxyUser         string         `yaml:"proxyUser,omitempty" json:"proxyUser,omitempty"`
+		ProxyPass         string         `yaml:"proxyPass,omitempty" json:"proxyPass,omitempty"`
+		Annotations       map[string]any `yaml:"annotations,omitempty" json:"annotations,omitempty"`
+		Labels            map[string]any `yaml:"labels,omitempty" json:"labels,omitempty"`
+		Statefulsetspec   struct {
 			Template struct {
-				Spec struct {
-				} `yaml:"spec,omitempty" json:"spec,omitempty"`
+				Spec map[string]any `yaml:"spec,omitempty" json:"spec,omitempty"`
 			} `yaml:"template,omitempty" json:"template,omitempty"`
 		} `yaml:"statefulsetspec,omitempty" json:"statefulsetspec,omitempty"`
 	} `yaml:"collector,omitempty" json:"collector,omitempty"`
@@ -144,8 +137,7 @@ type OldArgusConf struct {
 		} `yaml:"selfMonitor,omitempty" json:"selfMonitor,omitempty"`
 		Collectors []string `yaml:"collectors,omitempty" json:"collectors,omitempty"`
 	} `yaml:"kube-state-metrics,omitempty" json:"kube-state-metrics,omitempty"`
-	Resources struct {
-	} `yaml:"resources,omitempty" json:"resources,omitempty"`
+	Resources map[string]any `yaml:"resources,omitempty" json:"resources,omitempty"`
 }
 
 func (oldConf *OldArgusConf) ToNewArgusConf() *NewArgusConf {

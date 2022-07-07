@@ -12,20 +12,15 @@ type NewArgusConf struct {
 		PullPolicy string `yaml:"pullPolicy,omitempty" json:"pullPolicy,omitempty"`
 		Tag        string `yaml:"tag,omitempty" json:"tag,omitempty"`
 	} `yaml:"image,omitempty" json:"image,omitempty"`
-	NodeSelector struct {
-	} `yaml:"nodeSelector,omitempty" json:"nodeSelector,omitempty"`
-	Affinity struct {
-	} `yaml:"affinity,omitempty" json:"affinity,omitempty"`
-	PriorityClassName string        `yaml:"priorityClassName,omitempty" json:"priorityClassName,omitempty"`
-	Tolerations       []interface{} `yaml:"tolerations,omitempty" json:"tolerations,omitempty"`
-	Resources         struct {
-	} `yaml:"resources,omitempty" json:"resources,omitempty"`
-	Labels struct {
-	} `yaml:"labels,omitempty" json:"labels,omitempty"`
-	Annotations struct {
-	} `yaml:"annotations,omitempty" json:"annotations,omitempty"`
-	Replicas            int `yaml:"replicas,omitempty" json:"replicas,omitempty"`
-	ResourceContainerID int `yaml:"resourceContainerID,omitempty" json:"resourceContainerID,omitempty"`
+	NodeSelector        map[string]any `yaml:"nodeSelector,omitempty" json:"nodeSelector,omitempty"`
+	Affinity            map[string]any `yaml:"affinity,omitempty" json:"affinity,omitempty"`
+	PriorityClassName   string         `yaml:"priorityClassName,omitempty" json:"priorityClassName,omitempty"`
+	Tolerations         []interface{}  `yaml:"tolerations,omitempty" json:"tolerations,omitempty"`
+	Resources           map[string]any `yaml:"resources,omitempty" json:"resources,omitempty"`
+	Labels              map[string]any `yaml:"labels,omitempty" json:"labels,omitempty"`
+	Annotations         map[string]any `yaml:"annotations,omitempty" json:"annotations,omitempty"`
+	Replicas            int            `yaml:"replicas,omitempty" json:"replicas,omitempty"`
+	ResourceContainerID int            `yaml:"resourceContainerID,omitempty" json:"resourceContainerID,omitempty"`
 	Log                 struct {
 		Level string `yaml:"level,omitempty" json:"level,omitempty"`
 	} `yaml:"log,omitempty" json:"log,omitempty"`
@@ -127,14 +122,11 @@ type NewArgusConf struct {
 			User string `yaml:"user,omitempty" json:"user,omitempty"`
 			Pass string `yaml:"pass,omitempty" json:"pass,omitempty"`
 		} `yaml:"proxy,omitempty" json:"proxy,omitempty"`
-		Annotations struct {
-		} `yaml:"annotations,omitempty" json:"annotations,omitempty"`
-		Labels struct {
-		} `yaml:"labels,omitempty" json:"labels,omitempty"`
+		Annotations     map[string]any `yaml:"annotations,omitempty" json:"annotations,omitempty"`
+		Labels          map[string]any `yaml:"labels,omitempty" json:"labels,omitempty"`
 		StatefulsetSpec struct {
 			Template struct {
-				Spec struct {
-				} `yaml:"spec,omitempty" json:"spec,omitempty"`
+				Spec map[string]any `yaml:"spec,omitempty" json:"spec,omitempty"`
 			} `yaml:"template,omitempty" json:"template,omitempty"`
 		} `yaml:"statefulsetSpec,omitempty" json:"statefulsetSpec,omitempty"`
 	} `yaml:"collector,omitempty" json:"collector,omitempty"`
