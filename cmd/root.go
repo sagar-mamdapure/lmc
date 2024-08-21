@@ -7,14 +7,13 @@ Copyright © 2022 logicmonitor logicmonitor@gmail.com
 
 import (
 	"errors"
+	"os"
+
 	"github.com/kelseyhightower/envconfig"
 	"github.com/spf13/cobra"
-	"os"
 )
 
-var (
-	HelmConfigObj = HelmConfig{}
-)
+var HelmConfigObj = HelmConfig{}
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
@@ -57,7 +56,7 @@ func init() {
 	}
 
 	rootCmd.PersistentFlags().BoolVarP(&Quiet, "quiet", "q", false, "Stop informative message on stdout")
-	//fmt.Println(HelmConfigObj)
+	// fmt.Println(HelmConfigObj)
 }
 
 type HelmConfig struct {

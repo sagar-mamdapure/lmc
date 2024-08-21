@@ -3,15 +3,16 @@ package cmd
 import (
 	"encoding/json"
 	"fmt"
+	"io/fs"
+	"io/ioutil"
+	"strings"
+
 	"github.com/logicmonitor/lmc/pkg/config"
 	"github.com/logicmonitor/lmc/pkg/conv"
 	"github.com/logicmonitor/lmc/pkg/exec"
 	"github.com/logicmonitor/lmc/pkg/util"
 	"github.com/spf13/cobra"
 	"gopkg.in/yaml.v2"
-	"io/fs"
-	"io/ioutil"
-	"strings"
 )
 
 var (
@@ -168,7 +169,7 @@ func init() {
 	migrateCmd.Flags().StringVar(&cscr, "csc-release", "collectorset-controller", "Collectorset Controller Helm Release Name")
 	migrateCmd.Flags().StringVar(&acf, "argus-conf-file", "argus-configuration.yaml", "Argus Configuration Yaml File Path")
 	migrateCmd.Flags().StringVar(&csccf, "csc-conf-file", "collectorset-controller-configuration.yaml", "Collectorset Controller Configuration Yaml File Path")
-	//migrateCmd.Flags().StringVarP(&output, "output", "o", "", "Output Format")
+	// migrateCmd.Flags().StringVarP(&output, "output", "o", "", "Output Format")
 	migrateCmd.Flags().VarP(&output, "output", "o", "Output Format")
 	migrateCmd.Flags().BoolVar(&UsingFiles, "using-files", false, "Set this flag to migrate configuration using yaml files")
 	_ = migrateCmd.RegisterFlagCompletionFunc("output", func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {

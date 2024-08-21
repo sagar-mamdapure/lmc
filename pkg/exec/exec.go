@@ -22,8 +22,8 @@ import (
 	"os/exec"
 	"strings"
 
-	"github.com/pkg/errors"
 	"github.com/logicmonitor/lmc/pkg/util"
+	"github.com/pkg/errors"
 )
 
 type ProcessExecutor struct {
@@ -52,7 +52,6 @@ func (p ProcessExecutor) RunProcessInDirAndCaptureOutput(workingDirectory string
 
 	cmd.Dir = workingDirectory
 	bytes, err := cmd.CombinedOutput()
-
 	if err != nil {
 		return "", errors.Wrap(err, "Error running process")
 	}
@@ -67,7 +66,6 @@ func (p ProcessExecutor) RunProcessInDirAndCaptureStdout(workingDirectory string
 
 	cmd.Dir = workingDirectory
 	bytes, err := cmd.Output()
-
 	if err != nil {
 		return "", errors.Wrap(err, "Error running process")
 	}

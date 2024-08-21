@@ -3,23 +3,28 @@ package util
 import (
 	"errors"
 	"fmt"
-	"github.com/logrusorgru/aurora/v3"
-	"github.com/spf13/cobra"
-	"github.com/logicmonitor/lmc/pkg/icon"
-	"gopkg.in/yaml.v2"
 	"net"
 	"os"
+
+	"github.com/logicmonitor/lmc/pkg/icon"
+	"github.com/logrusorgru/aurora/v3"
+	"github.com/spf13/cobra"
+	"gopkg.in/yaml.v2"
 )
 
-var Debug = false
-var Quiet = false
+var (
+	Debug = false
+	Quiet = false
+)
 
 func SetDebug(b bool) {
 	Debug = b
 }
+
 func SetQuiet(b bool) {
 	Quiet = b
 }
+
 func Flatten(items []interface{}) ([]string, error) {
 	return doFlatten([]string{}, items)
 }
@@ -79,12 +84,13 @@ func printlnConfig(prefix string, cmd *cobra.Command, out interface{}) {
 	}
 	cmd.Printf("\n%s\n%v\n", prefix, string(marshal))
 }
+
 func PrintlnDebug(cmd *cobra.Command, msg string) {
 	if Debug {
 		cmd.Println(msg)
 	}
-
 }
+
 func PrintlnDebugConfig(cmd *cobra.Command, prefix string, out interface{}) {
 	if Debug {
 		printlnConfig(prefix, cmd, out)
@@ -96,19 +102,23 @@ func printf(cmd *cobra.Command, msg aurora.Value) {
 	if err != nil {
 		return
 	}
-	//cmd.Printf()
+	// cmd.Printf()
 }
+
 func getMsgWithIcon(msg string, ic icon.Icon) string {
 	return fmt.Sprintf("\n%s %s\n", ic, msg)
 }
+
 func PrintlnSuccess(cmd *cobra.Command, msg string) {
 	if !Quiet {
 		printf(cmd, aurora.Green(getMsgWithIcon(msg, icon.SuccessTick)))
 	}
 }
+
 func PrintlnFailed(cmd *cobra.Command, msg string) {
 	printf(cmd, aurora.Red(getMsgWithIcon(msg, icon.FailedCross)))
 }
+
 func PrintlnRunning(cmd *cobra.Command, msg string) {
 	if !Quiet {
 		printf(cmd, aurora.Index(151, getMsgWithIcon(msg, icon.RoundStar)).Faint())

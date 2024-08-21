@@ -76,7 +76,7 @@ func (lmc *LMCConf) combine() {
 
 func Merge(csc *conv.NewCscConf, argus *conv.NewArgusConf) (*LMCConf, error) {
 	lmc := &LMCConf{}
-	//reflect.Copy()
+	// reflect.Copy()
 	lmc.CollectorsetController = csc
 	lmc.Argus = argus
 	lmc.combine()

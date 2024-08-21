@@ -213,7 +213,7 @@ func (oldConf *OldArgusConf) ToNewArgusConf() *NewArgusConf {
 			if len(value) > 0 {
 				arr := strings.Split(value, " || ")
 				for _, r := range arr {
-					//newConf.Filters = append(newConf.Filters, "type == \""+k+"\" && "+r)
+					// newConf.Filters = append(newConf.Filters, "type == \""+k+"\" && "+r)
 					newConf.Filters = append(newConf.Filters, fmt.Sprintf("type == \"%s\" && %s", k, r))
 				}
 			}

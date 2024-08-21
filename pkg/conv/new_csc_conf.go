@@ -26,7 +26,7 @@ type NewCscConf struct {
 		User string `yaml:"user,omitempty" json:"user,omitempty"`
 		Pass string `yaml:"pass,omitempty" json:"pass,omitempty"`
 	} `yaml:"proxy,omitempty" json:"proxy,omitempty"`
-	NodeSelector map[string]any `yaml:"nodeSelector,omitempty" json:"nodeSelector,omitempty"`
+	NodeSelector      map[string]any    `yaml:"nodeSelector,omitempty" json:"nodeSelector,omitempty"`
 	Affinity          map[string]any    `yaml:"affinity,omitempty" json:"affinity,omitempty"`
 	PriorityClassName string            `yaml:"priorityClassName,omitempty" json:"priorityClassName,omitempty"`
 	Tolerations       []map[string]any  `yaml:"tolerations,omitempty" json:"tolerations,omitempty"`
