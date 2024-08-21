@@ -2,9 +2,10 @@ package conv
 
 import (
 	"fmt"
-	"gopkg.in/yaml.v2"
 	"strconv"
 	"strings"
+
+	"gopkg.in/yaml.v2"
 )
 
 type intOrString int
@@ -104,22 +105,25 @@ type OldArgusConf struct {
 		Port int `yaml:"port,omitempty" json:"port,omitempty"`
 	} `yaml:"openmetrics,omitempty" json:"openmetrics,omitempty"`
 	Collector struct {
-		Replicas          intOrString    `yaml:"replicas,omitempty" json:"replicas,omitempty"`
-		Size              string         `yaml:"size,omitempty" json:"size,omitempty"`
-		ImageRepository   string         `yaml:"imageRepository,omitempty" json:"imageRepository,omitempty"`
-		ImageTag          string         `yaml:"imageTag,omitempty" json:"imageTag,omitempty"`
-		ImagePullPolicy   string         `yaml:"imagePullPolicy,omitempty" json:"imagePullPolicy,omitempty"`
-		SecretName        string         `yaml:"secretName,omitempty" json:"secretName,omitempty"`
-		GroupID           int            `yaml:"groupID,omitempty" json:"groupID,omitempty"`
-		EscalationChainID intOrString    `yaml:"escalationChainID,omitempty" json:"escalationChainID,omitempty"`
-		CollectorVersion  int            `yaml:"collectorVersion,omitempty" json:"collectorVersion,omitempty"`
-		UseEA             bool           `yaml:"useEA,omitempty" json:"useEA,omitempty"`
-		ProxyURL          string         `yaml:"proxyURL,omitempty" json:"proxyURL,omitempty"`
-		ProxyUser         string         `yaml:"proxyUser,omitempty" json:"proxyUser,omitempty"`
-		ProxyPass         string         `yaml:"proxyPass,omitempty" json:"proxyPass,omitempty"`
-		Annotations       map[string]any `yaml:"annotations,omitempty" json:"annotations,omitempty"`
-		Labels            map[string]any `yaml:"labels,omitempty" json:"labels,omitempty"`
-		Statefulsetspec   struct {
+		Replicas          intOrString `yaml:"replicas,omitempty" json:"replicas,omitempty"`
+		Size              string      `yaml:"size,omitempty" json:"size,omitempty"`
+		ImageRepository   string      `yaml:"imageRepository,omitempty" json:"imageRepository,omitempty"`
+		ImageTag          string      `yaml:"imageTag,omitempty" json:"imageTag,omitempty"`
+		ImagePullPolicy   string      `yaml:"imagePullPolicy,omitempty" json:"imagePullPolicy,omitempty"`
+		SecretName        string      `yaml:"secretName,omitempty" json:"secretName,omitempty"`
+		GroupID           int         `yaml:"groupID,omitempty" json:"groupID,omitempty"`
+		EscalationChainID intOrString `yaml:"escalationChainID,omitempty" json:"escalationChainID,omitempty"`
+		CollectorVersion  int         `yaml:"collectorVersion,omitempty" json:"collectorVersion,omitempty"`
+		UseEA             bool        `yaml:"useEA,omitempty" json:"useEA,omitempty"`
+		Env               struct {
+			CollectorNonRoot bool `yaml:"COLLECTOR_NON_ROOT,omitempty" json:"COLLECTOR_NON_ROOT,omitempty"`
+		} `yaml:"env,omitempty" json:"env,omitempty"`
+		ProxyURL        string         `yaml:"proxyURL,omitempty" json:"proxyURL,omitempty"`
+		ProxyUser       string         `yaml:"proxyUser,omitempty" json:"proxyUser,omitempty"`
+		ProxyPass       string         `yaml:"proxyPass,omitempty" json:"proxyPass,omitempty"`
+		Annotations     map[string]any `yaml:"annotations,omitempty" json:"annotations,omitempty"`
+		Labels          map[string]any `yaml:"labels,omitempty" json:"labels,omitempty"`
+		Statefulsetspec struct {
 			Template struct {
 				Spec map[string]any `yaml:"spec,omitempty" json:"spec,omitempty"`
 			} `yaml:"template,omitempty" json:"template,omitempty"`
@@ -225,6 +229,7 @@ func (oldConf *OldArgusConf) ToNewArgusConf() *NewArgusConf {
 	newConf.Collector.Version = oldConf.Collector.CollectorVersion
 	newConf.Collector.Size = oldConf.Collector.Size
 	newConf.Collector.UseEA = oldConf.Collector.UseEA
+	newConf.Collector.Env.CollectorNonRoot = oldConf.Collector.Env.CollectorNonRoot
 	if oldConf.Collector.GroupID == -1 {
 		newConf.Collector.Lm.GroupID = 0
 	} else if oldConf.Collector.GroupID != 1 {

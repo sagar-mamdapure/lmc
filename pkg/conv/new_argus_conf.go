@@ -107,7 +107,10 @@ type NewArgusConf struct {
 		Version  int    `yaml:"version,omitempty" json:"version,omitempty"`
 		Size     string `yaml:"size,omitempty" json:"size,omitempty"`
 		UseEA    bool   `yaml:"useEA,omitempty" json:"useEA,omitempty"`
-		Lm       struct {
+		Env      struct {
+			CollectorNonRoot bool `yaml:"COLLECTOR_NON_ROOT,omitempty" json:"COLLECTOR_NON_ROOT,omitempty"`
+		} `yaml:"env,omitempty" json:"env,omitempty"`
+		Lm struct {
 			GroupID           int `yaml:"groupID,omitempty" json:"groupID,omitempty"`
 			EscalationChainID int `yaml:"escalationChainID,omitempty" json:"escalationChainID,omitempty"`
 		} `yaml:"lm,omitempty" json:"lm,omitempty"`
